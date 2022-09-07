@@ -4,12 +4,12 @@ function App() {
   const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [willUpdateTodo, setWillUpdateTodo] = useState("");
 
-  const editTodo = (id) => {
+  const deleteTodo = (id) => {
     console.log(id);
-    setIsEdit(true);
-    const searchedTodo = todos.find((item) => item.id === id);
-    setTodoText(searchedTodo.text);
+    const filteredTodos = todos.filter((item) => item.id !== id);
+    setTodos(filteredTodos);
   };
 
   const changeIsDone = (id) => {
@@ -35,15 +35,29 @@ function App() {
       return;
     }
 
-    const newTodo = {
-      id: new Date().getTime(),
-      isDone: false,
-      text: todoText,
-      date: new Date(),
-    };
-    setTodos([...todos, newTodo]);
-    setTodoText("");
-    console.log(newTodo);
+    if (isEdit === true) {
+      console.log(willUpdateTodo);
+      const searchedTodo = todos.find((item) => item.id === willUpdateTodo);
+      const updatedTodo = {
+        ...searchedTodo,
+        text: todoText,
+      };
+      const filteredTodos = todos.filter((item) => item.id !== willUpdateTodo);
+      setTodos([...filteredTodos, updatedTodo]);
+      setTodoText("");
+      setIsEdit(false);
+      setWillUpdateTodo("");
+    } else {
+      const newTodo = {
+        id: new Date().getTime(),
+        isDone: false,
+        text: todoText,
+        date: new Date(),
+      };
+      setTodos([...todos, newTodo]);
+      setTodoText("");
+      console.log(newTodo);
+    }
   };
   return (
     <div className="container">
@@ -57,8 +71,11 @@ function App() {
             placeholder="Type your Todo"
             onChange={(event) => setTodoText(event.target.value)}
           />
-          <button className="btn btn-primary" type="submit">
-            ADD
+          <button
+            className={`btn btn-${isEdit === true ? "success" : "primary"}`}
+            type="submit"
+          >
+            {isEdit === true ? "Save" : "Add"}
           </button>
         </div>
       </form>
@@ -76,8 +93,18 @@ function App() {
               <p className="my-auto ">{item.text}</p>
               <div>
                 <button
+                  className="btn btn-sm btn-danger"
+                  onClick={() => deleteTodo(item.id)}
+                >
+                  Delete
+                </button>
+                <button
                   className="btn btn-sm btn-success mx-1"
-                  onClick={() => editTodo(item.id)}
+                  onClick={() => {
+                    setIsEdit(true);
+                    setWillUpdateTodo(item.id);
+                    setTodoText(item.text);
+                  }}
                 >
                   Edit
                 </button>
