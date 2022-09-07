@@ -3,6 +3,14 @@ import React, { useState } from "react";
 function App() {
   const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const editTodo = (id) => {
+    console.log(id);
+    setIsEdit(true);
+    const searchedTodo = todos.find((item) => item.id === id);
+    setTodoText(searchedTodo.text);
+  };
 
   const changeIsDone = (id) => {
     const searchedTodo = todos.find((item) => item.id === id);
@@ -33,7 +41,7 @@ function App() {
       text: todoText,
       date: new Date(),
     };
-    setTodos([newTodo, ...todos]);
+    setTodos([...todos, newTodo]);
     setTodoText("");
     console.log(newTodo);
   };
@@ -60,18 +68,26 @@ function App() {
         <>
           {todos.map((item) => (
             <div
-              className="alert alert-secondary d-flex justify-content-between"
+              className={`alert alert-${
+                item.isDone === true ? "success" : "secondary"
+              } d-flex justify-content-between`}
               role="alert"
             >
               <p className="my-auto ">{item.text}</p>
-              <button
-                onClick={() => {
-                  changeIsDone(item.id);
-                }}
-                className="btn btn-sm btn-secondary"
-              >
-                {item.isDone === false ? "Done" : "Undone"}
-              </button>
+              <div>
+                <button
+                  className="btn btn-sm btn-success mx-1"
+                  onClick={() => editTodo(item.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => changeIsDone(item.id)}
+                  className="btn btn-sm btn-secondary"
+                >
+                  {item.isDone === false ? "Done" : "Undone"}
+                </button>
+              </div>
             </div>
           ))}
         </>
