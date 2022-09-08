@@ -3,7 +3,7 @@
 <h1>What is it about?
 <h6>It is not only about saving data but also about editing and deleting process of the datas.
 <h3>How is it made?
-<h6>It has been made by coding all state and props in line with required order of a certain logic.First of all, any empty task entrance or input of the same task with pre-existing task name have been prevented.Javascript and JSX codes have been rendered in order to change color,text of some components.
+<h6>It has been made by coding all state and props in line with required order of a certain logic. First of all, any empty task entrance or input of the same task with pre-existing task name have been prevented. Javascript and JSX codes have been rendered in order to change color,text of some components.
 
 <hr>
 
