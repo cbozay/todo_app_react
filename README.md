@@ -3,7 +3,7 @@
 <h1>What is it about?
 <h6>It is not only about saving data but also about editing and deleting process of the datas.
 <h3>How is it made?
-<h6>It has been made by coding all state and props in line with required order of a certain logic. First of all, any empty task entrance or input of the same task with pre-existing task name have been prevented. Javascript and JSX codes have been rendered in order to change color,text of some components. Also with localstorage, it has been acquired permanent data memory within ram. Namely, whenever is entered to the website, it can be found and read the previous inputs without losing datas.
+<h6>It has been made by coding all state and props in line with required order of a certain logic. First of all, any empty task entrance or input of the same task with pre-existing task name have been prevented. Javascript and JSX codes have been rendered in order to change color,text of some components. Also with localstorage, it has been acquired permanent data memory within ram. Namely, whenever is entered to the website, it can be found and read the previous inputs without losing datas like https://tubular-pastelito-da295b.netlify.app/
 
 <hr>
 
